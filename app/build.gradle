@@ -125,4 +125,6 @@ dependencies {
     // AndroidJUnitRunner and JUnit Rules
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
+
+    implementation 'br.com.simplepass:loading-button-android:2.2.0'
 }

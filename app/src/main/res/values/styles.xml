@@ -10,4 +10,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!-- Custom styles-->
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/primaryTextColorTransparent25</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
 </resources>

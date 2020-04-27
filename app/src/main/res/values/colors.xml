@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="primaryColor">#344955</color>
     <color name="primaryLightColor">#5f7481</color>
     <color name="primaryDarkColor">#0b222c</color>
@@ -7,5 +7,12 @@
     <color name="secondaryLightColor">#ffdc65</color>
     <color name="secondaryDarkColor">#c17b00</color>
     <color name="primaryTextColor">#ffffff</color>
+    <color name="primaryTextColorTransparent50">#51FFFFFF</color>
+    <color name="primaryTextColorTransparent25">#25FFFFFF</color>
     <color name="secondaryTextColor">#000000</color>
+
+    <!-- Custom colors -->
+    <color name="customRed">#f10408</color>
+    <color name="customGreen">#57a701</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/primaryTextColorTransparent25</color>
 </resources>

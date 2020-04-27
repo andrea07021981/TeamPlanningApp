@@ -7,6 +7,10 @@ class LoginViewModel(
     application: Application
 ) : ViewModel() {
 
+    var emailValue = MutableLiveData<String>()
+    var passwordValue = MutableLiveData<String>()
+    var errorPassword = MutableLiveData<Boolean>()
+    var errorEmail = MutableLiveData<Boolean>()
 
     /**
      * Factory for constructing DevByteViewModel with parameter

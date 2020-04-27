@@ -1,12 +1,21 @@
 package com.example.teamplanningapp.ui
 
+import android.content.Context
+import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.transition.TransitionInflater
+import br.com.simplepass.loadingbutton.animatedDrawables.ProgressType
+import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+import br.com.simplepass.loadingbutton.customViews.ProgressButton
 import com.example.teamplanningapp.R
 import com.example.teamplanningapp.databinding.FragmentLoginBinding
 import com.example.teamplanningapp.viewmodel.LoginViewModel
@@ -39,4 +48,30 @@ class LoginFragment : Fragment() {
         dataBinding.lifecycleOwner = this
         return dataBinding.root
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val btn = dataBinding.root.findViewById(R.id.login_button) as CircularProgressButton
+        btn.run { setOnClickListener { morphDoneAndRevert(requireNotNull(activity)) } }
+
+
+    }
+    private fun ProgressButton.morphDoneAndRevert(
+        context: Context,
+        fillColor: Int = ContextCompat.getColor(context, R.color.customGreen),
+        bitmap: Bitmap = defaultDoneImage(context.resources),
+        doneTime: Long = 3000,
+        revertTime: Long = 4000
+    ) {
+        progressType = ProgressType.INDETERMINATE
+        startAnimation()
+        Handler().run {
+            postDelayed({ doneLoadingAnimation(fillColor, bitmap) }, doneTime)
+            postDelayed(::revertAnimation, revertTime)
+        }
+    }
+
+    private fun defaultDoneImage(resources: Resources) =
+        BitmapFactory.decodeResource(resources, R.mipmap.ic_check_ok)
+
 }
