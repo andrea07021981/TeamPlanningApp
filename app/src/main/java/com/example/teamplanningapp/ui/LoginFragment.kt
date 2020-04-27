@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
 import br.com.simplepass.loadingbutton.animatedDrawables.ProgressType
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
@@ -65,9 +66,13 @@ class LoginFragment : Fragment() {
     ) {
         progressType = ProgressType.INDETERMINATE
         startAnimation()
+        //TODO REMOVE HANDLER AND CALL FIREBASE
         Handler().run {
             postDelayed({ doneLoadingAnimation(fillColor, bitmap) }, doneTime)
+            //TODO call revert only with fail
             postDelayed(::revertAnimation, revertTime)
+            //IF RESULT OK, GO HOME AND USE https://gist.github.com/ferdy182/d9b3525aa65b5b4c468a
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
         }
     }
 
