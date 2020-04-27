@@ -12,6 +12,8 @@ class LoginViewModel(
     var errorPassword = MutableLiveData<Boolean>()
     var errorEmail = MutableLiveData<Boolean>()
 
+    //TODO ADD BUTTON ANIMATION STATE LOGIN AND REVEAL
+    //https://gist.github.com/ferdy182/d9b3525aa65b5b4c468a
     /**
      * Factory for constructing DevByteViewModel with parameter
      */
