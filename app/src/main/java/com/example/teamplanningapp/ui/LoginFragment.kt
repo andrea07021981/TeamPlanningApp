@@ -79,7 +79,7 @@ class LoginFragment : Fragment() {
             }
             is Authenticated -> {
                 Handler().run {
-                    post { doneLoadingAnimation(fillColor, bitmap) }
+                    doneLoadingAnimation(fillColor, bitmap)
                     postDelayed({
                         val extras = FragmentNavigatorExtras(
                         login_button to "login_button")
