@@ -13,6 +13,7 @@
 
     <!-- Custom colors -->
     <color name="customRed">#f10408</color>
+    <color name="customLightRed">#E35E60</color>
     <color name="customGreen">#57a701</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/primaryTextColorTransparent25</color>
 </resources>

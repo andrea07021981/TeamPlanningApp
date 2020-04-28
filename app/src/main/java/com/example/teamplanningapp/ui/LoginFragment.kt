@@ -9,17 +9,23 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
 import br.com.simplepass.loadingbutton.animatedDrawables.ProgressType
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
 import br.com.simplepass.loadingbutton.customViews.ProgressButton
 import com.example.teamplanningapp.R
+import com.example.teamplanningapp.constant.*
 import com.example.teamplanningapp.databinding.FragmentLoginBinding
 import com.example.teamplanningapp.viewmodel.LoginViewModel
+import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {
 
@@ -47,33 +53,55 @@ class LoginFragment : Fragment() {
         dataBinding = FragmentLoginBinding.inflate(inflater)
         dataBinding.loginViewModel = loginViewModel
         dataBinding.lifecycleOwner = this
+
+        loginViewModel.loginAuthenticationState.observe(this.viewLifecycleOwner, Observer {
+            login_button.run { morphDoneAndRevert(requireNotNull(activity), it) }
+        })
+
         return dataBinding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        val btn = dataBinding.root.findViewById(R.id.login_button) as CircularProgressButton
-        btn.run { setOnClickListener { morphDoneAndRevert(requireNotNull(activity)) } }
-
-
-    }
+    //TODO review animation, it should be declared as bindingadapter and manage differetns states
+    //TODO review the handler as soons as we implement firebase authentication
     private fun ProgressButton.morphDoneAndRevert(
         context: Context,
+        state: LoginAuthenticationStates?,
         fillColor: Int = ContextCompat.getColor(context, R.color.customGreen),
         bitmap: Bitmap = defaultDoneImage(context.resources),
         doneTime: Long = 3000,
         revertTime: Long = 4000
     ) {
         progressType = ProgressType.INDETERMINATE
-        startAnimation()
-        //TODO REMOVE HANDLER AND CALL FIREBASE
-        Handler().run {
-            postDelayed({ doneLoadingAnimation(fillColor, bitmap) }, doneTime)
-            //TODO call revert only with fail
-            postDelayed(::revertAnimation, revertTime)
-            //IF RESULT OK, GO HOME AND USE https://gist.github.com/ferdy182/d9b3525aa65b5b4c468a
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+
+        when (state) {
+            is Authenticating -> {
+                startAnimation()
+            }
+            is Authenticated -> {
+                Handler().run {
+                    post { doneLoadingAnimation(fillColor, bitmap) }
+                    postDelayed({
+                        val extras = FragmentNavigatorExtras(
+                        login_button to "login_button")
+                        findNavController()
+                            .navigate(R.id.homeFragment, null, null, extras)}, doneTime/2)
+                }
+            }
+            is Unauthenticated -> {
+                Handler().run {
+                    postDelayed(::revertAnimation, revertTime)
+                }
+            }
+            is InvalidAuthentication -> {
+                val fillColorError = ContextCompat.getColor(context, R.color.customRed)
+                val bitmapError: Bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_check_ko)
+                Handler().run {
+                    postDelayed({ doneLoadingAnimation(fillColorError, bitmapError) }, doneTime)
+                    postDelayed(::revertAnimation, revertTime)
+                }
+            }
         }
+
     }
 
     private fun defaultDoneImage(resources: Resources) =
