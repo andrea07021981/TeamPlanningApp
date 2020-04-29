@@ -1,11 +1,13 @@
 package com.example.teamplanningapp.ui
 
+import android.animation.Animator
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.ViewGroup
+import android.view.animation.Animation
 import androidx.fragment.app.Fragment
 import com.example.teamplanningapp.databinding.FragmentHomeBinding
 
@@ -51,6 +53,21 @@ class HomeFragment : Fragment() {
                 )
                 // make the view visible and start the animation
                 dataBinding.rootLayout.visibility = View.VISIBLE
+                anim.addListener(object : Animator.AnimatorListener {
+                    override fun onAnimationRepeat(p0: Animator?) {
+                    }
+
+                    override fun onAnimationEnd(p0: Animator?) {
+                    }
+
+                    override fun onAnimationCancel(p0: Animator?) {
+                    }
+
+                    override fun onAnimationStart(p0: Animator?) {
+                        //TODO START ANIMATION FOR THE VIEW CHILDREN
+                    }
+
+                })
                 anim.start()
             }
         }

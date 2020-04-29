@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "176335322139",
+    "firebase_url": "https://teamplanningapp-7863a.firebaseio.com",
+    "project_id": "teamplanningapp-7863a",
+    "storage_bucket": "teamplanningapp-7863a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176335322139:android:045beb580054e5e2370cbe",
+        "android_client_info": {
+          "package_name": "com.example.teamplanningapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "176335322139-3tisi4iu590vucosjj0jhm85fbiiq5sf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.teamplanningapp",
+            "certificate_hash": "707a380bf380d97577bd12a1294def9a4a26321e"
+          }
+        },
+        {
+          "client_id": "176335322139-bch4j84rsqsbapv1scsqqdu6q4actkjh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDN6NjyDDLwVrupsqOug2L_IZVSmO-CRNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "176335322139-bch4j84rsqsbapv1scsqqdu6q4actkjh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

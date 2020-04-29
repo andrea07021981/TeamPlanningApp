@@ -21,6 +21,8 @@ buildscript {
         version_recyclerview = "1.1.0"
         version_glide = "4.8.0"
         version_paging = "2.1.2"
+        version_playservice = "4.3.3"
+        version_analytics = "17.3.0"
     }
     repositories {
         google()
@@ -31,6 +33,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:$version_gradle"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin"
         classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$version_navigation"
+        classpath "com.google.gms:google-services:$version_playservice"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
