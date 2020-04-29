@@ -31,5 +31,9 @@
         android:id="@+id/homeFragment"
         android:name="com.example.teamplanningapp.ui.HomeFragment"
         tools:layout="@layout/fragment_home"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <argument
+            android:name="params"
+            app:argType="android.os.Bundle" />
+    </fragment>
 </navigation>

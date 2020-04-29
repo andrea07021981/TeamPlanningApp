@@ -9,7 +9,6 @@
         android:id="@+id/rootLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:transitionName="login_button">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:background="@color/primaryColor"
+        tools:context=".ui.HomeFragment"/>
 </layout>

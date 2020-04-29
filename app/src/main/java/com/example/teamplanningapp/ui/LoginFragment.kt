@@ -9,7 +9,6 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -19,7 +18,6 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
 import br.com.simplepass.loadingbutton.animatedDrawables.ProgressType
-import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
 import br.com.simplepass.loadingbutton.customViews.ProgressButton
 import com.example.teamplanningapp.R
 import com.example.teamplanningapp.constant.*
@@ -42,7 +40,6 @@ class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(R.transition.custommove)
     }
 
     override fun onCreateView(
@@ -69,6 +66,7 @@ class LoginFragment : Fragment() {
         fillColor: Int = ContextCompat.getColor(context, R.color.customGreen),
         bitmap: Bitmap = defaultDoneImage(context.resources),
         doneTime: Long = 3000,
+        navigateTime: Long = 1000,
         revertTime: Long = 4000
     ) {
         progressType = ProgressType.INDETERMINATE
@@ -81,10 +79,10 @@ class LoginFragment : Fragment() {
                 Handler().run {
                     doneLoadingAnimation(fillColor, bitmap)
                     postDelayed({
-                        val extras = FragmentNavigatorExtras(
-                        login_button to "login_button")
+                        val bundle = bundleOf("x" to dataBinding.loginButton.x, "y" to dataBinding.loginButton.y)
                         findNavController()
-                            .navigate(R.id.homeFragment, null, null, extras)}, doneTime/2)
+                            .navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment(bundle))}, navigateTime)
+                    loginViewModel.resetState()
                 }
             }
             is Unauthenticated -> {

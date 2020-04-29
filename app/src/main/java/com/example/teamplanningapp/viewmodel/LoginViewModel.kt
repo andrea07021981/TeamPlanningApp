@@ -57,6 +57,10 @@ class LoginViewModel(
         timer.start()
     }
 
+    fun resetState() {
+        _loginAuthenticationState.value = null
+    }
+
     /**
      * Factory for constructing DevByteViewModel with parameter
      */
