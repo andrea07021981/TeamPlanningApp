@@ -1,4 +1,4 @@
-package com.example.teamplanningapp.ui
+package com.example.teamplanningapp.home
 
 import android.animation.Animator
 import android.os.Build
@@ -7,10 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.ViewGroup
-import android.view.animation.Animation
 import androidx.fragment.app.Fragment
 import com.example.teamplanningapp.databinding.FragmentHomeBinding
-
 
 class HomeFragment : Fragment() {
 
@@ -22,7 +20,10 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         dataBinding = FragmentHomeBinding.inflate(inflater)
-        animateTransition(HomeFragmentArgs.fromBundle(requireArguments()).params)
+        animateTransition(
+            HomeFragmentArgs.fromBundle(
+                requireArguments()
+            ).params)
         return dataBinding.root
     }
 

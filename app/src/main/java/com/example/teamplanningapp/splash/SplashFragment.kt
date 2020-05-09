@@ -1,4 +1,4 @@
-package com.example.teamplanningapp.ui
+package com.example.teamplanningapp.splash
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,8 +12,6 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.example.teamplanningapp.R
 import com.example.teamplanningapp.databinding.FragmentSplashBinding
-import com.example.teamplanningapp.viewmodel.SplashViewModel
-import kotlinx.android.synthetic.main.fragment_splash.view.*
 
 class SplashFragment : Fragment() {
 

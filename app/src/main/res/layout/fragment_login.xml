@@ -8,7 +8,7 @@
     <data>
         <variable
             name="loginViewModel"
-            type="com.example.teamplanningapp.viewmodel.LoginViewModel" />
+            type="com.example.teamplanningapp.login.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primaryColor"
-        tools:context=".ui.LoginFragment">
+        tools:context=".login.LoginFragment">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/worker_imageview"

@@ -1,4 +1,4 @@
-package com.example.teamplanningapp.ui
+package com.example.teamplanningapp.login
 
 import android.content.Context
 import android.content.res.Resources
@@ -14,15 +14,12 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import androidx.transition.TransitionInflater
 import br.com.simplepass.loadingbutton.animatedDrawables.ProgressType
 import br.com.simplepass.loadingbutton.customViews.ProgressButton
 import com.example.teamplanningapp.R
 import com.example.teamplanningapp.constant.*
 import com.example.teamplanningapp.databinding.FragmentLoginBinding
-import com.example.teamplanningapp.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {
@@ -33,7 +30,8 @@ class LoginFragment : Fragment() {
 
     private val loginViewModel: LoginViewModel by lazy {
         val activity = requireNotNull(this.activity)
-        ViewModelProvider(this, LoginViewModel.Factory(app = activity.application)).get(LoginViewModel::class.java)
+        ViewModelProvider(this, LoginViewModel.Factory(app = activity.application)).get(
+            LoginViewModel::class.java)
     }
 
     private lateinit var dataBinding: FragmentLoginBinding
@@ -81,7 +79,11 @@ class LoginFragment : Fragment() {
                     postDelayed({
                         val bundle = bundleOf("x" to dataBinding.loginButton.x, "y" to dataBinding.loginButton.y)
                         findNavController()
-                            .navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment(bundle))}, navigateTime)
+                            .navigate(
+                                LoginFragmentDirections.actionLoginFragmentToHomeFragment(
+                                    bundle
+                                )
+                            )}, navigateTime)
                     loginViewModel.resetState()
                 }
             }

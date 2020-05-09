@@ -1,4 +1,4 @@
-package com.example.teamplanningapp.viewmodel
+package com.example.teamplanningapp.login
 
 import android.app.Application
 import android.os.CountDownTimer
@@ -26,9 +26,6 @@ class LoginViewModel(
     val navigateToSignUpFragment: LiveData<Boolean>
         get() = _navigateToSignUpFragment
 
-    private var viewModelJob = Job()
-    private var uiScope = CoroutineScope(Dispatchers.IO + viewModelJob)
-
     //TODO ADD BUTTON ANIMATION STATE LOGIN AND REVEAL animation transition
     //https://gist.github.com/ferdy182/d9b3525aa65b5b4c468a
 
@@ -45,7 +42,7 @@ class LoginViewModel(
         }
     }
 
-    private fun doLogin() {
+    private fun doLogin()  = viewModelScope.launch{
         _loginAuthenticationState.value = Authenticating()
         val timer = object : CountDownTimer(1000, 3000) {
             override fun onTick(millisUntilFinished: Long) {}

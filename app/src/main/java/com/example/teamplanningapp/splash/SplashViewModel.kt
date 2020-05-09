@@ -1,4 +1,4 @@
-package com.example.teamplanningapp.viewmodel
+package com.example.teamplanningapp.splash
 
 import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
