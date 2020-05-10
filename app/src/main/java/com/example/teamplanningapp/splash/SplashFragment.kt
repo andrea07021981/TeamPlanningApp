@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavOptions
@@ -15,9 +16,7 @@ import com.example.teamplanningapp.databinding.FragmentSplashBinding
 
 class SplashFragment : Fragment() {
 
-    private val splashViewModel: SplashViewModel by lazy {
-        ViewModelProvider(this).get(SplashViewModel::class.java)
-    }
+    private val splashViewModel by viewModels<SplashViewModel>()
 
     private lateinit var dataBinding: FragmentSplashBinding
 

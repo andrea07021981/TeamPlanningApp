@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -19,6 +20,7 @@ import br.com.simplepass.loadingbutton.animatedDrawables.ProgressType
 import br.com.simplepass.loadingbutton.customViews.ProgressButton
 import com.example.teamplanningapp.R
 import com.example.teamplanningapp.constant.*
+import com.example.teamplanningapp.data.source.repository.LoginDataRepository
 import com.example.teamplanningapp.databinding.FragmentLoginBinding
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -28,10 +30,8 @@ class LoginFragment : Fragment() {
         private val TAG = LoginFragment::class.java.name
     }
 
-    private val loginViewModel: LoginViewModel by lazy {
-        val activity = requireNotNull(this.activity)
-        ViewModelProvider(this, LoginViewModel.Factory(app = activity.application)).get(
-            LoginViewModel::class.java)
+    private val loginViewModel by viewModels<LoginViewModel> {
+        LoginViewModel.LoginViewModelFactory(LoginDataRepository.getRepository(requireActivity().application))
     }
 
     private lateinit var dataBinding: FragmentLoginBinding

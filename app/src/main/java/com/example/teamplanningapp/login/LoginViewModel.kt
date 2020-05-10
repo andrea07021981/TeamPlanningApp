@@ -4,13 +4,14 @@ import android.app.Application
 import android.os.CountDownTimer
 import androidx.lifecycle.*
 import com.example.teamplanningapp.constant.*
+import com.example.teamplanningapp.data.source.repository.LoginDataRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class LoginViewModel(
-    application: Application
+class LoginViewModel private constructor(
+    dataRepository: LoginDataRepository
 ) : ViewModel() {
 
     var emailValue = MutableLiveData<String>()
@@ -61,11 +62,13 @@ class LoginViewModel(
     /**
      * Factory for constructing DevByteViewModel with parameter
      */
-    class Factory(val app: Application) : ViewModelProvider.Factory {
+    class LoginViewModelFactory(
+        private val dataRepository: LoginDataRepository
+    ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return LoginViewModel(app) as T
+                return LoginViewModel(dataRepository) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
