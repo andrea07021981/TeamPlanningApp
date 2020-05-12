@@ -37,10 +37,10 @@ class NestedFragment : Fragment() {
         savedInstanceState: Bundle?
     ) : View? {
         dataBinding = FragmentNestedBinding.inflate(inflater)
-        /*animateTransition(
+        animateTransition(
             NestedFragmentArgs.fromBundle(
                 requireArguments()
-            ).params)*/
+            ).params)
         return dataBinding.root
     }
 
@@ -101,14 +101,14 @@ class NestedFragment : Fragment() {
                 // Scale the View based on current slide offset
                 val diffScaledOffset = slideOffset * (1 - 0.5f)
                 val offsetScale = 1 - diffScaledOffset
-                dataBinding.rootLayout.setScaleX(offsetScale)
-                dataBinding.rootLayout.setScaleY(offsetScale)
+                dataBinding.rootLayout.scaleX = offsetScale
+                dataBinding.rootLayout.scaleY = offsetScale
 
                 // Translate the View, accounting for the scaled width
                 val xOffset = drawerView.width * slideOffset
-                val xOffsetDiff: Float = dataBinding.rootLayout.getWidth() * diffScaledOffset / 2
+                val xOffsetDiff: Float = dataBinding.rootLayout.width * diffScaledOffset / 2
                 val xTranslation = xOffset - xOffsetDiff
-                dataBinding.rootLayout.setTranslationX(xTranslation)
+                dataBinding.rootLayout.translationX = xTranslation
             }
         }
         )
