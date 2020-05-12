@@ -20,10 +20,10 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         dataBinding = FragmentHomeBinding.inflate(inflater)
-        animateTransition(
+        /*animateTransition(
             HomeFragmentArgs.fromBundle(
                 requireArguments()
-            ).params)
+            ).params)*/
         return dataBinding.root
     }
 

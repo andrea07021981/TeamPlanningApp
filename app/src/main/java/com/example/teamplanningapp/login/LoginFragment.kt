@@ -80,7 +80,7 @@ class LoginFragment : Fragment() {
                         val bundle = bundleOf("x" to dataBinding.loginButton.x, "y" to dataBinding.loginButton.y)
                         findNavController()
                             .navigate(
-                                LoginFragmentDirections.actionLoginFragmentToHomeFragment(
+                                LoginFragmentDirections.actionLoginFragmentToNestedNavGraph(
                                     bundle
                                 )
                             )}, navigateTime)
