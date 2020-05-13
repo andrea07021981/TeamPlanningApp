@@ -1,17 +1,13 @@
 package com.example.teamplanningapp.login
 
-import android.app.Application
-import android.os.CountDownTimer
 import androidx.lifecycle.*
+import com.example.teamplanningapp.Result
 import com.example.teamplanningapp.constant.*
 import com.example.teamplanningapp.data.source.repository.LoginDataRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class LoginViewModel private constructor(
-    dataRepository: LoginDataRepository
+    private val dataRepository: LoginDataRepository
 ) : ViewModel() {
 
     var emailValue = MutableLiveData<String>()
@@ -32,7 +28,7 @@ class LoginViewModel private constructor(
 
     init {
         emailValue.value = "a@a.com"
-        passwordValue.value = "a"
+        passwordValue.value = "aaaaaa"
     }
 
     fun onSignUpClick(){
@@ -45,14 +41,20 @@ class LoginViewModel private constructor(
 
     private fun doLogin()  = viewModelScope.launch{
         _loginAuthenticationState.value = Authenticating()
-        val timer = object : CountDownTimer(1000, 3000) {
+        val result = dataRepository.retrieveUser(emailValue.value!!, passwordValue.value!!)
+        when (result) {
+            is Result.Success -> _loginAuthenticationState.value = Authenticated()
+            is Result.Error -> _loginAuthenticationState.value = InvalidAuthentication(result.message)
+            else -> _loginAuthenticationState.value = null
+        }
+        /*val timer = object : CountDownTimer(1000, 3000) {
             override fun onTick(millisUntilFinished: Long) {}
 
             override fun onFinish() {
                 _loginAuthenticationState.value = Authenticated()
             }
         }
-        timer.start()
+        timer.start()*/
     }
 
     fun resetState() {

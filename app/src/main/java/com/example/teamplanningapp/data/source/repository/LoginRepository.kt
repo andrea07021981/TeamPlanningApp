@@ -1,10 +1,11 @@
 package com.example.teamplanningapp.data.source.repository
 
+import com.example.teamplanningapp.Result
 import com.google.firebase.auth.FirebaseUser
 
 interface LoginRepository {
     val TAG: String
         get() = LoginRepository::class.java.simpleName
 
-    suspend fun retrieveUser(user: FirebaseUser)
+    suspend fun retrieveUser(email: String, password: String): Result<FirebaseUser?>
 }
