@@ -53,7 +53,7 @@ class LoginFragment : Fragment() {
         loginViewModel.loginAuthenticationState.observe(this.viewLifecycleOwner, Observer {
             if (it is Authenticated) {
                 login_button.run { morphDoneAndRevert(requireNotNull(activity), it) }
-            } else {
+            } else if (it is Unauthenticated){
                 Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
             }
         })

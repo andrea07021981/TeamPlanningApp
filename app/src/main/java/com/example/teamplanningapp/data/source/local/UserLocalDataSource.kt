@@ -1,5 +1,6 @@
 package com.example.teamplanningapp.data.source.local
 
+import androidx.lifecycle.MutableLiveData
 import com.example.teamplanningapp.Result
 import com.example.teamplanningapp.data.source.UserDataSource
 import com.google.android.gms.tasks.Task
@@ -14,7 +15,7 @@ class UserLocalDataSource internal constructor(
     //private val userDatabaseDao: UserDatabaseDao,
     //private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : UserDataSource {
-    override suspend fun getUser(email: String, password: String): Task<AuthResult> {
+    override suspend fun getUser(email: String, password: String): Result<FirebaseUser> {
         TODO("Not yet implemented")
     }
 }

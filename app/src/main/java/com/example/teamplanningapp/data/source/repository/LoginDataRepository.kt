@@ -4,7 +4,6 @@ import android.app.Application
 import com.example.teamplanningapp.Result
 import com.example.teamplanningapp.data.source.UserDataSource
 import com.example.teamplanningapp.data.source.remote.UserRemoteDataSource
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -30,14 +29,9 @@ class LoginDataRepository(
         }
     }
 
-    override suspend fun retrieveUser(email: String, password: String): Result<FirebaseUser?>{
+    override suspend fun retrieveUser(email: String, password: String): Result<FirebaseUser>{
         return withContext(ioDispatcher) {
-            val user = remoteDataSource.getUser(email, password)
-            if (user.result?.user != null) {
-                return@withContext Result.Success(user.result?.user)
-            } else {
-                return@withContext Result.Error("Login Error")
-            }
+            remoteDataSource.getUser(email, password)
         }
     }
 }
